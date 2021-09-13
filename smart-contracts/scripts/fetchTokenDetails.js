@@ -49,6 +49,10 @@ async function main() {
       const symbol = await instance.symbol();
       const decimals = await instance.decimals();
 
+      if(decimals != 18) {
+        throw new Error('INVALID_DECIMALS');
+      }
+
       finalList.push({
         address,
         name,
@@ -59,6 +63,7 @@ async function main() {
       print('green', `--> Processed token "${name}" (${symbol}) successfully: ${decimals} decimals.`, true);
     } catch(e) {
       print('red', `--> Failed to fetch details of token ${address}: ${e.message}`);
+      throw e;
     }
   }
 
@@ -83,5 +88,6 @@ function print(color, message, breakLine) {
 main()
    .catch((error) => {
      console.error({ error });
+     throw error;
    })
    .finally(() => process.exit(0))
