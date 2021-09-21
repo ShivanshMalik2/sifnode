@@ -5,27 +5,30 @@ require('@nomiclabs/hardhat-etherscan');
 require('@openzeppelin/hardhat-upgrades');
 require('dotenv').config();
 
+const print = require('./test/helpers/helpers').colorLog;
+
 const mainnetUrl = process.env['MAINNET_URL'] ?? 'https://example.com';
 const ropstenUrl = process.env['ROPSTEN_URL'] ?? 'https://example.com';
 const ropstenPrivateKey = process.env['ROPSTEN_PRIVATE_KEY'] ?? '0xabcd';
 const mainnetPrivateKey = process.env['MAINNET_PRIVATE_KEY'] ?? '0xabcd';
 
-//const activePrivateKey = process.env[process.env.ACTIVE_PRIVATE_KEY] ?? '0xabcde';
-const activePrivateKey = 'e67825808c9642d98d16b5794d34582432cb158610ff3934e8a0bac074e725f2';
+const activePrivateKey = process.env[process.env.ACTIVE_PRIVATE_KEY] ?? '0xabcde';
+
+// Works only for 'hardhat' network:
+const useForking = !!process.env.USE_FORKING;
+
+// Initial Log
+const logColor = useForking ? 'yellowHighlight' : 'blueHighlight';
+print(logColor, `HARDHAT | Use Forking: ${useForking}`);
 
 module.exports = {
   networks: {
     hardhat: {
       allowUnlimitedContractSize: false,
-    },
-    mainnetFork: {
-      url: mainnetUrl,
-      allowUnlimitedContractSize: false,
-      chainId: 1,
-      accounts: [activePrivateKey],
       forking: {
+        enabled: useForking,
         url: mainnetUrl,
-        blockNumber: 10959000,
+        blockNumber: 13270000,
       },
     },
     ropsten: {
