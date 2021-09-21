@@ -11,10 +11,8 @@ function fixSignature(signature) {
 }
 
 function toEthSignedMessageHash(messageHex) {
-  const messageBuffer = Buffer.from(messageHex.substring(2), "hex");
-  const prefix = Buffer.from(
-    `\u0019Ethereum Signed Message:\n${messageBuffer.length}`
-  );
+  const messageBuffer = Buffer.from(messageHex.substring(2), 'hex');
+  const prefix = Buffer.from(`\u0019Ethereum Signed Message:\n${messageBuffer.length}`);
   return web3.utils.sha3(Buffer.concat([prefix, messageBuffer]));
 }
 
@@ -23,17 +21,19 @@ function toEthSignedMessageHash(messageHex) {
  * @dev Start your string with the color of choice and end it with .close
  * @dev Example: console.log(`${colors.green}Your message here${colors.close}`);
  */
- const colors = {
+const colors = {
   green: '\x1b[32m',
   red: '\x1b[41m\x1b[37m',
   white: '\x1b[37m',
-  highlight: '\x1b[47m\x1b[30m',
   yellow: '\x1b[33m',
   blue: '\x1b[34m',
   magenta: '\x1b[35m',
   cyan: '\x1b[36m',
-  close: '\x1b[0m'
-}
+  close: '\x1b[0m',
+  highlight: '\x1b[47m\x1b[30m',
+  blueHighlight: '\x1b[44m\x1b[30m',
+  yellowHighlight: '\x1b[43m\x1b[30m',
+};
 
 /**
  * Colorizes and prints logs without using libs
@@ -46,5 +46,5 @@ function colorLog(colorName, message) {
 module.exports = {
   toEthSignedMessageHash,
   fixSignature,
-  colorLog
+  colorLog,
 };
