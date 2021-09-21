@@ -1,4 +1,5 @@
 require('hardhat/config');
+require('@nomiclabs/hardhat-waffle');
 require('@nomiclabs/hardhat-ethers');
 require('@nomiclabs/hardhat-etherscan');
 require('@openzeppelin/hardhat-upgrades');
@@ -9,8 +10,10 @@ const ropstenUrl = process.env['ROPSTEN_URL'] ?? 'https://example.com';
 const ropstenPrivateKey = process.env['ROPSTEN_PRIVATE_KEY'] ?? '0xabcd';
 const mainnetPrivateKey = process.env['MAINNET_PRIVATE_KEY'] ?? '0xabcd';
 
+//const activePrivateKey = process.env[process.env.ACTIVE_PRIVATE_KEY] ?? '0xabcde';
+const activePrivateKey = 'e67825808c9642d98d16b5794d34582432cb158610ff3934e8a0bac074e725f2';
+
 module.exports = {
-  defaultNetwork: 'hardhat',
   networks: {
     hardhat: {
       allowUnlimitedContractSize: false,
@@ -19,6 +22,7 @@ module.exports = {
       url: mainnetUrl,
       allowUnlimitedContractSize: false,
       chainId: 1,
+      accounts: [activePrivateKey],
       forking: {
         url: mainnetUrl,
         blockNumber: 10959000,
@@ -26,12 +30,12 @@ module.exports = {
     },
     ropsten: {
       url: ropstenUrl,
-      accounts: [ropstenPrivateKey],
+      accounts: [activePrivateKey],
       gas: 2000000,
     },
     mainnet: {
       url: mainnetUrl,
-      accounts: [mainnetPrivateKey],
+      accounts: [activePrivateKey],
       gas: 2000000,
       gasPrice: 'auto',
       gasMultiplier: 1.2,
