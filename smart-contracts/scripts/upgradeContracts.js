@@ -1,3 +1,5 @@
+const hardhat = require('hardhat');
+
 const support = require('./helpers/forkingSupport');
 const print = require('../test/helpers/helpers').colorLog;
 
@@ -16,7 +18,25 @@ async function main() {
   const operator_cb = await cosmosBridge.operator();
   print('cyan', `-> Operator: ${operator_cb}`);
 
-  const operatorImpersonated = await support.impersonateAccount(operator_bb, 1000000000);
+  //TODO: figure out how to use the correct account here
+  //const admin = await support.impersonateAccount(operator_bb, 1000000000);
+  const admin = await support.impersonateAccount(
+    '0xD60500F92b59B4D02664442E023408Bad3725133',
+    1000000000
+  );
+
+  const newBridgeBankFactory = await hardhat.ethers.getContractFactory('BridgeBank');
+  const newCosmosBridgeFactory = await hardhat.ethers.getContractFactory('CosmosBridge');
+
+  await hardhat.upgrades.upgradeProxy(bridgeBank, newBridgeBankFactory.connect(admin), {
+    unsafeAllowCustomTypes: true,
+  });
+
+  await hardhat.upgrades.upgradeProxy(cosmosBridge, newCosmosBridgeFactory.connect(admin), {
+    unsafeAllowCustomTypes: true,
+  });
+
+  print('greenHighlight', '~~~ DONE! ~~~');
 }
 
 main()
