@@ -33,6 +33,7 @@ const colors = {
   highlight: '\x1b[47m\x1b[30m',
   blueHighlight: '\x1b[44m\x1b[30m',
   yellowHighlight: '\x1b[43m\x1b[30m',
+  greenHighlight: '\x1b[42m\x1b[30m',
 };
 
 /**
