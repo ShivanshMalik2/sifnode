@@ -2,7 +2,7 @@
  * Responsible for fetching deployment data and returning a valid ethers contract instance
  */
 const fs = require('fs');
-const hre = require('hardhat');
+//const hre = require('hardhat');
 const { ethers, network } = require('hardhat');
 
 const print = require('../../test/helpers/helpers').colorLog;
@@ -11,6 +11,8 @@ const print = require('../../test/helpers/helpers').colorLog;
 // but it can also be used to fork Ropsten
 const DEPLOYMENT_DIRECTORY = 'deployments';
 const DEFAULT_DEPLOYMENT_NAME = 'sifchain-1';
+
+const PROXY_ADMIN_ADDRESS = '0x7c6c6ea036e56efad829af5070c8fb59dc163d88';
 
 async function getDeployedContract(deploymentName, contractName, chainId) {
   deploymentName = deploymentName ?? DEFAULT_DEPLOYMENT_NAME;
@@ -65,8 +67,17 @@ async function setNewEthBalance(address, newBalance) {
   print('magenta', `Balance for account ${address} set to ${newBalance}`);
 }
 
+function enforceForking() {
+  const forkingActive = !!process.env.USE_FORKING;
+  if(!forkingActive) {
+    throw new Error('Forking is not active. Operation aborted.');
+  }
+}
+
 module.exports = {
+  PROXY_ADMIN_ADDRESS,
   getDeployedContract,
   impersonateAccount,
   setNewEthBalance,
+  enforceForking
 };

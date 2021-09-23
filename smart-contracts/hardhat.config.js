@@ -25,6 +25,7 @@ module.exports = {
   networks: {
     hardhat: {
       allowUnlimitedContractSize: false,
+      chainId: 1,
       forking: {
         enabled: useForking,
         url: mainnetUrl,
