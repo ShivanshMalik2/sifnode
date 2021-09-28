@@ -57,7 +57,7 @@ async function impersonateAccount(address, newBalance) {
 
   print('magenta', `Account ${address} successfully impersonated`);
 
-  return await ethers.getSigner(address);
+  return ethers.getSigner(address);
 }
 
 async function setNewEthBalance(address, newBalance) {

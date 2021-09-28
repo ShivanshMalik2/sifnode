@@ -14,6 +14,7 @@ async function main() {
   const operator_bb = await bridgeBank.operator();
   print('cyan', `-> Operator: ${operator_bb}`);
 
+  /*
   // creates an instance of CosmosBridge from the deployed code
   const { instance: cosmosBridge } = await support.getDeployedContract(
     'sifchain-1',
@@ -22,6 +23,7 @@ async function main() {
   );
   const operator_cb = await cosmosBridge.operator();
   print('cyan', `-> Operator: ${operator_cb}`);
+  */
 
   // Finds out which account is the proxy admin
   //TODO: figure out how to use the correct account here

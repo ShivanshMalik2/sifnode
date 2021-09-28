@@ -7,12 +7,15 @@ require('dotenv').config();
 
 const print = require('./test/helpers/helpers').colorLog;
 
-const mainnetUrl = process.env['MAINNET_URL'] ?? 'https://example.com';
-const ropstenUrl = process.env['ROPSTEN_URL'] ?? 'https://example.com';
-const ropstenPrivateKey = process.env['ROPSTEN_PRIVATE_KEY'] ?? '0xabcd';
-const mainnetPrivateKey = process.env['MAINNET_PRIVATE_KEY'] ?? '0xabcd';
+const networkUrl = process.env['NETWORK_URL'];
+const activePrivateKey = process.env[process.env.ACTIVE_PRIVATE_KEY];
 
-const activePrivateKey = process.env[process.env.ACTIVE_PRIVATE_KEY] ?? '0xabcde';
+if(networkUrl == '') {
+  throw new Error('INVALID_NETWORK_URL')
+}
+if(activePrivateKey == '') {
+  throw new Error('INVALID_PRIVATE_KEY')
+}
 
 // Works only for 'hardhat' network:
 const useForking = !!process.env.USE_FORKING;
@@ -28,17 +31,17 @@ module.exports = {
       chainId: 1,
       forking: {
         enabled: useForking,
-        url: mainnetUrl,
-        blockNumber: 13270000,
+        url: networkUrl,
+        blockNumber: 13316453,
       },
     },
     ropsten: {
-      url: ropstenUrl,
+      url: networkUrl,
       accounts: [activePrivateKey],
       gas: 2000000,
     },
     mainnet: {
-      url: mainnetUrl,
+      url: networkUrl,
       accounts: [activePrivateKey],
       gas: 2000000,
       gasPrice: 'auto',
