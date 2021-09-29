@@ -64,7 +64,7 @@ async function setNewEthBalance(address, newBalance) {
   const newValue = `0x${newBalance.toString(16)}`;
   await ethers.provider.send('hardhat_setBalance', [address, newValue]);
 
-  print('magenta', `Balance for account ${address} set to ${newBalance}`);
+  print('magenta', `Balance of account ${address} set to ${newBalance}`);
 }
 
 function enforceForking() {
