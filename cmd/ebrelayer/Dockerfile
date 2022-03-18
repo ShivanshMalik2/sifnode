@@ -22,7 +22,7 @@ RUN make install
 #
 # Main
 #
-FROM alpine
+FROM alpine:3.15
 
 # Copy the smart contract ABIs over.
 ADD cmd/ebrelayer/contract/generated  /sif/cmd/ebrelayer/contract/generated
