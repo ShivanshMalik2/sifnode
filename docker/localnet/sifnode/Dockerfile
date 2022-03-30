@@ -19,7 +19,7 @@ RUN make install
 #
 # Main
 #
-FROM alpine
+FROM alpine:3.15.3
 
 EXPOSE 1317
 EXPOSE 26656
