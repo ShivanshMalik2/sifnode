@@ -3,3 +3,4 @@ prettytable==2.0.0
 pysha3==1.0.2
 slither-analyzer==0.6.14
 wcwidth==0.2.5
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
