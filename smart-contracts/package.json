@@ -89,7 +89,7 @@
     "whitelist:test": "npx hardhat run scripts/fetchTokenDetails.js --network hardhat && npx hardhat run scripts/bulk_set_whitelist.ts --network hardhat"
   },
   "dependencies": {
-    "concurrently": "^6.2.0",
+    "concurrently": "^6.2.2",
     "truffle": "^5.4.7"
   }
 }
