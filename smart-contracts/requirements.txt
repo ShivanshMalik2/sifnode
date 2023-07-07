@@ -1,4 +1,4 @@
-crytic-compile==0.1.10
+crytic-compile==0.3.2
 prettytable==2.0.0
 pysha3==1.0.2
 slither-analyzer==0.6.14
