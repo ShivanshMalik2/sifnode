@@ -19,7 +19,7 @@ RUN make install
 #
 # Main
 #
-FROM alpine
+FROM alpine:3.18.3
 
 ENV PACKAGES curl jq bind-tools expect nodejs npm
 
