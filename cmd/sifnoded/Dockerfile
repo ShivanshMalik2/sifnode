@@ -34,7 +34,7 @@ RUN CHAINNET=$CHAINNET make install
 #
 # Main
 #
-FROM alpine
+FROM alpine:3.20
 
 ENV PACKAGES curl jq bind-tools expect
 
